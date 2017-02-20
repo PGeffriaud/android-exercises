@@ -1,5 +1,7 @@
 package fr.android.androidexercises;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import java.util.Date;
 
 public class LibraryActivity extends AppCompatActivity {
 
@@ -22,15 +29,19 @@ public class LibraryActivity extends AppCompatActivity {
 
         final Book book = new Book("Garry Whopper", "CK Rowling");
 
-        openButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LibraryActivity.this, BookActivity.class);
-                // Add book to intent
-                intent.putExtra("BOOK", book);
-                startActivity(intent);
-            }
+        openButton.setOnClickListener(v -> {
+            new DatePickerDialog(LibraryActivity.this, (view, year, month, dayOfMonth) ->
+                    new TimePickerDialog(LibraryActivity.this, (view1, hourOfDay, minute) ->
+                            Toast.makeText(LibraryActivity.this, String.format("%d/%d/%d %d:%d", dayOfMonth+1, month+1, year, hourOfDay, minute), Toast.LENGTH_SHORT).show(),
+                    12, 0, true).show(),
+            2017, 2, 20).show();
         });
+
+
+   /* Intent intent = new Intent(LibraryActivity.this, BookActivity.class);
+    //Add book to intent
+    intent.putExtra("BOOK", book);
+    startActivity(intent);*/
     }
 
     @Override

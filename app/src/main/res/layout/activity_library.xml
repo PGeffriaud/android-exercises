@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Library">
+    tools:context=".Library"
+    android:weightSum="1">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -24,7 +25,8 @@
 
     <Button
         android:id="@+id/openButton"
-        android:layout_width="wrap_content"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
-        android:text="@string/action_see"/>
+        android:text="@string/action_see"
+        android:layout_weight="0.02" />
 </LinearLayout>
