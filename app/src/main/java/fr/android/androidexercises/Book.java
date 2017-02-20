@@ -1,11 +1,11 @@
 package fr.android.androidexercises;
 
-public class Book {
+class Book {
 
-    public final String name;
-    public final float price;
+    final String name;
+    final float price;
 
-    public Book(String name, float price) {
+    Book(String name, float price) {
         this.name = name;
         this.price = price;
     }
@@ -17,8 +17,7 @@ public class Book {
 
         Book book = (Book) o;
 
-        if (Float.compare(book.price, price) != 0) return false;
-        return name.equals(book.name);
+        return Float.compare(book.price, price) == 0 && name.equals(book.name);
 
     }
 
