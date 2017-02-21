@@ -15,6 +15,9 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        jackOptions {
+            enabled true
+        }
     }
 
     buildTypes {
@@ -23,6 +26,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -30,10 +38,9 @@ dependencies {
     compile 'com.android.support:design:25.1.1'
 
     // Retrofit
-    // compile 'com.squareup.retrofit:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
 
     // GSon converter
-    // compile 'com.squareup.retrofit:converter-gson:2.1.0'
-
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.jakewharton.timber:timber:4.5.1'
 }
