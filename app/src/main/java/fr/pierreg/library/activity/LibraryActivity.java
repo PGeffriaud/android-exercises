@@ -14,35 +14,64 @@ import java.util.Random;
 import fr.android.androidexercises.R;
 import fr.pierreg.library.adapter.RecyclerViewAdapter;
 import fr.pierreg.library.model.Book;
+import fr.pierreg.library.presenter.LibraryPresenter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import timber.log.Timber;
 
 public class LibraryActivity extends AppCompatActivity {
 
     private static final Random RANDOM = new Random();
+
+    private LibraryPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
 
-        List<Book> books = getBooks();
+        Timber.plant(new Timber.DebugTree());
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.book_recycler_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.columns)));
+        presenter = new LibraryPresenter();
+        presenter.getBooks().enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                for (Book book : response.body()) {
+                    Timber.i(book.toString());
+                }
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.book_recycler_view);
+                recyclerView.setLayoutManager(new GridLayoutManager(LibraryActivity.this, getResources().getInteger(R.integer.columns)));
 
-        recyclerView.setAdapter(
-                new RecyclerViewAdapter(LayoutInflater.from(this), books));
+                recyclerView.setAdapter(
+                        new RecyclerViewAdapter(LayoutInflater.from(LibraryActivity.this), response.body()));
+            }
 
-    }
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Timber.e(t);
+            }
+        });
 
-    private List<Book> getBooks() {
-        ArrayList<Book> books = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            books.add(new Book(
-                    String.format(Locale.FRANCE, "Garry Potier Tome %d", i),
-                    RANDOM.nextInt(30))
-            );
-        }
-        return books;
+
+
     }
 
 }
+
+/*
+listCall.enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                LibraryPresenter.this.books = response.body();
+                for (Book book : response.body()) {
+                    Timber.i(book.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Timber.e(t);
+            }
+        });
+ */

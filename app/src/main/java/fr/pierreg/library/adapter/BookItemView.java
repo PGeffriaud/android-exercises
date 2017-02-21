@@ -36,8 +36,8 @@ public class BookItemView extends LinearLayout {
     }
 
     public void bindView(Book book) {
-        this.nameTextView.setText(book.name);
-        this.priceTextView.setText(String.valueOf(book.price));
+        this.nameTextView.setText(book.getTitle());
+        this.priceTextView.setText(book.getPrice());
         this.imageView.setImageResource(R.drawable.ic_launcher);
 
     }

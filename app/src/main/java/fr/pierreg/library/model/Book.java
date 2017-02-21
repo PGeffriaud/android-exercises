@@ -2,12 +2,41 @@ package fr.pierreg.library.model;
 
 public class Book {
 
-    public final String name;
-    public final float price;
+    private String isbn;
+    private String title;
+    private String price;
+    private String cover;
 
-    public Book(String name, float price) {
-        this.name = name;
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     @Override
@@ -17,14 +46,22 @@ public class Book {
 
         Book book = (Book) o;
 
-        return Float.compare(book.price, price) == 0 && name.equals(book.name);
+        return isbn.equals(book.isbn);
 
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
-        return result;
+        return isbn.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", price='" + price + '\'' +
+                ", cover='" + cover + '\'' +
+                '}';
     }
 }
