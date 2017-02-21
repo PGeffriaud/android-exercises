@@ -1,11 +1,11 @@
-package fr.android.androidexercises;
+package fr.pierreg.library.model;
 
-class Book {
+public class Book {
 
-    final String name;
-    final float price;
+    public final String name;
+    public final float price;
 
-    Book(String name, float price) {
+    public Book(String name, float price) {
         this.name = name;
         this.price = price;
     }
