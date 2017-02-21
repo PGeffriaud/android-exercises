@@ -1,0 +1,30 @@
+package fr.android.androidexercises;
+
+class Book {
+
+    final String name;
+    final float price;
+
+    Book(String name, float price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return Float.compare(book.price, price) == 0 && name.equals(book.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
+        return result;
+    }
+}
