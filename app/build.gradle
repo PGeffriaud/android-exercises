@@ -23,6 +23,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 dependencies {
@@ -30,4 +32,10 @@ dependencies {
     compile 'com.android.support:design:25.1.1'
 
     // TODO add testCompile dependencies
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '2.0.2-beta'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.6.2'
+
+
+
 }
