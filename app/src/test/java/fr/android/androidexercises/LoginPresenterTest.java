@@ -35,8 +35,7 @@ public class LoginPresenterTest {
 
     @Test
     public void shouldNotLoginIfNullPassword() throws Exception {
-        String password = null;
-        presenter.checkCredentials(password);
+        presenter.checkCredentials(null);
 
         Mockito.verify(activity).notLogged();
         Mockito.verify(activity).message(R.string.notLogged);
